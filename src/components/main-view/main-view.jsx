@@ -1,5 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 
+import { LoginView } from '../login-view/login-view';
+import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
@@ -8,13 +11,22 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [
-        { _id: 1, Title: 'Inception', Description: 'Description 1...', ImagePath: 'tbd1.jpg', Genre: 'Science-Fiction' },
-        { _id: 2, Title: 'The Shawshank Redemption', Description: 'Description 2...', ImagePath: 'tbd2.jpg', Genre: 'Drama' },
-        { _id: 3, Title: 'Gladiator', Description: 'Description 3...', ImagePath: 'tbd3.jpg', Genre: 'Action/Adventure' }
-      ],
-      selectedMovie: null //initial value is null until movie card is selected
+      movies: [],
+      selectedMovie: null, //initial value is null until movie card is selected
+      user: null
     };
+  }
+
+  componentDidMount() { //connecting myFlix API with Axios
+    axios.get('https://bechflix.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   setSelectedMovie(newSelectedMovie) {
@@ -23,10 +35,24 @@ export class MainView extends React.Component {
     });
   }
 
-  render() {
-    const { movies, selectedMovie } = this.state;
+  onLoggedIn(user) {
+    this.setState({
+      user
+    });
+  }
 
-    if (selectedMovie) return <MovieView movie={selectedMovie} />;
+  onRegistration(registration) {
+    this.setState({
+      registration
+    });
+  }
+
+  render() {
+    const { movies, selectedMovie, user } = this.state;
+
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+    //if (selectedMovie) return <MovieView movie={selectedMovie} />;
 
     if (movies.length === 0) return <div className="main-view"> This list is empty!</div>;
 
@@ -38,6 +64,7 @@ export class MainView extends React.Component {
             <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
           ))
         }
+        <button>Register Here</button>
       </div>
     );
   }

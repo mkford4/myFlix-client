@@ -22803,45 +22803,35 @@ class MainView extends _reactDefault.default.Component {
             __self: this,
             children: " This list is empty!"
         }));
-        return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 60
             },
             __self: this,
-            children: [
-                selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
-                    movie: selectedMovie,
-                    onBackClick: (newSelectedMovie)=>{
-                        this.setSelectedMovie(newSelectedMovie);
+            children: selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
+                movie: selectedMovie,
+                onBackClick: (newSelectedMovie)=>{
+                    this.setSelectedMovie(newSelectedMovie);
+                },
+                __source: {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 62
+                },
+                __self: this
+            }) : movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                    movie: movie,
+                    onMovieClick: (movie1)=>{
+                        this.setSelectedMovie(movie1);
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 62
+                        lineNumber: 64
                     },
                     __self: this
-                }) : movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
-                        movie: movie,
-                        onMovieClick: (movie1)=>{
-                            this.setSelectedMovie(movie1);
-                        },
-                        __source: {
-                            fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 64
-                        },
-                        __self: this
-                    }, movie._id)
-                ),
-                /*#__PURE__*/ _jsxRuntime.jsx("button", {
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 67
-                    },
-                    __self: this,
-                    children: "Register Here"
-                })
-            ]
+                }, movie._id)
+            )
         }));
     }
 }
@@ -24518,6 +24508,14 @@ function LoginView(props) {
                 },
                 __self: this,
                 children: "Submit"
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                __source: {
+                    fileName: "src/components/login-view/login-view.jsx",
+                    lineNumber: 31
+                },
+                __self: this,
+                children: "Register Here"
             })
         ]
     }));

@@ -64,7 +64,6 @@ export class MainView extends React.Component {
             <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
           ))
         }
-        <button>Register Here</button>
       </div>
     );
   }

@@ -18,6 +18,8 @@ export function LoginView(props) {
 
   return (
     <Form>
+      <Button>Register Here</Button>
+
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control type="text" onChange={e => setUsername(e.target.value)} />

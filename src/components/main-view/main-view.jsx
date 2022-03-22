@@ -9,9 +9,9 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: [
-        { _id: 1, Title: 'Inception', Description: 'Description 1...', ImagePath: 'tbd1.jpg', Genre: 'Science-Fiction' },
-        { _id: 2, Title: 'The Shawshank Redemption', Description: 'Description 2...', ImagePath: 'tbd2.jpg', Genre: 'Drama' },
-        { _id: 3, Title: 'Gladiator', Description: 'Description 3...', ImagePath: 'tbd3.jpg', Genre: 'Action/Adventure' }
+        { _id: 1, Title: 'Inception', Description: 'Description 1...', ImagePath: './img/inception.jpg', Genre: 'Science-Fiction' },
+        { _id: 2, Title: 'The Shawshank Redemption', Description: 'Description 2...', ImagePath: './img/shawshank.jpg', Genre: 'Drama' },
+        { _id: 3, Title: 'Gladiator', Description: 'Description 3...', ImagePath: './img/gladiator.jpg', Genre: 'Action/Adventure' }
       ],
       selectedMovie: null //initial value is null until movie card is selected
     };

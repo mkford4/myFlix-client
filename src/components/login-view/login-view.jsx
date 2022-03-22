@@ -11,22 +11,26 @@ export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  /*  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password);
     props.onLoggedIn(username);
-  };
-
-  /* const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.get('https://bechflix.herokuapp.com/users' {
-      Username: {Users.username},
-      Password: {Users.password},
-    })
-    .catch(e => {
-      console.log(e);
-    });
   }; */
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('https://bechflix.herokuapp.com/users' {
+      Username: { Users.username },
+      Password: { Users.password },
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('user doesn\'t exist');
+      });
+  };
 
   return (
     <Container>
@@ -34,7 +38,7 @@ export function LoginView(props) {
         <Col>
           <Card>
             <Card.Body>
-              <Card.Title style={(textAlign: "center")}>Login in Here</Card.Title>
+              <Card.Title /*style={(textAlign: "center")}*/ >Login in Here</Card.Title>
               <Form>
                 <Form.Group controlId="formGroupUsername">
                   <Form.Label>Username:</Form.Label>
@@ -47,6 +51,11 @@ export function LoginView(props) {
                 </Form.Group>
                 <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
               </Form>
+
+              <div><br></br>
+                <span>Or create an account here:</span><br></br>
+                <Button id="login-button" type="submit">Register Here</Button>
+              </div>
             </Card.Body>
           </Card>
         </Col>
@@ -54,4 +63,13 @@ export function LoginView(props) {
     </Container>
 
   );
+
+  LoginView.propTypes = {
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+      password: PropTypes.string.isRequired
+    }),
+    onLoggedIn: PropTypes.func.isRequired
+  };
+
 }

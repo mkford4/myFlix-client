@@ -971,7 +971,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./components/main-view/main-view":"2zHas","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8","./index.scss":"jUTZ8"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./components/main-view/main-view":"2zHas","./index.scss":"jUTZ8","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -22754,21 +22754,21 @@ class MainView extends _reactDefault.default.Component {
                     _id: 1,
                     Title: 'Inception',
                     Description: 'Description 1...',
-                    ImagePath: 'tbd1.jpg',
+                    ImagePath: require('./img/inception.jpg'),
                     Genre: 'Science-Fiction'
                 },
                 {
                     _id: 2,
                     Title: 'The Shawshank Redemption',
                     Description: 'Description 2...',
-                    ImagePath: 'tbd2.jpg',
+                    ImagePath: require('./img/shawshank.jpg'),
                     Genre: 'Drama'
                 },
                 {
                     _id: 3,
                     Title: 'Gladiator',
                     Description: 'Description 3...',
-                    ImagePath: 'tbd3.jpg',
+                    ImagePath: require('./img/gladiator.jpg'),
                     Genre: 'Action/Adventure'
                 }
             ],
@@ -22830,7 +22830,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8"}],"6EiBJ":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8","./img/inception.jpg":"bhPxf","./img/shawshank.jpg":"9Ylpw","./img/gladiator.jpg":"bKamR"}],"6EiBJ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4249 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -23165,6 +23165,50 @@ class MovieView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8"}],"jUTZ8":[function() {},{}]},["de4TZ","abD4r","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8"}],"bhPxf":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "inception.e0cb4198.jpg";
+
+},{"./helpers/bundle-url":"fnJI6"}],"fnJI6":[function(require,module,exports) {
+"use strict";
+var bundleURL = {
+};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"9Ylpw":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "shawshank.1908d7ab.jpg";
+
+},{"./helpers/bundle-url":"fnJI6"}],"bKamR":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "gladiator.7d28d029.jpg";
+
+},{"./helpers/bundle-url":"fnJI6"}],"jUTZ8":[function() {},{}]},["de4TZ","abD4r","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map

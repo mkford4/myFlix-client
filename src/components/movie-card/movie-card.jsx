@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import "./movie-card.scss";
+
 import { Button } from 'react-bootstrap/';
 import { Card } from 'react-bootstrap/';
 
@@ -30,6 +32,10 @@ MovieCard.propTypes = {
     Genre: PropTypes.shape({
       Name: PropTypes.string,
       Description: PropTypes.string
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string
     })
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired

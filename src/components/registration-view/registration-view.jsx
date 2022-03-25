@@ -9,14 +9,22 @@ export function RegistrationView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [Birthday, setBirthday] = setState('');
+  const [birthday, setBirthday] = useState('');
+
+  /*
+  const [usernameErr, setUsernameErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+  const [emailErr, setEmailErr] = useState("");
+  const [birthdayErr, setBirthdayErr] = useState("");
+  */
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('https://bechflix.herokuapp.com/users', {
       Username: username,
       Password: password,
-      Email: email
+      Email: email,
+      Birthday: birthday
     })
       .catch(e => {
         console.log('error registering the user');

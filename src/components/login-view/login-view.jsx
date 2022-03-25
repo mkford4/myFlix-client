@@ -11,12 +11,6 @@ export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  /*  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
-  }; */
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('https://bechflix.herokuapp.com/users', {

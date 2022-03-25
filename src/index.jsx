@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import MainView root component
 import { MainView } from './components/main-view/main-view';
+import { Container, Col, Row } from 'react-bootstrap/';
 
 //import to bundle scss file with jsx
 import './index.scss';

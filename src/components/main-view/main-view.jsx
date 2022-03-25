@@ -47,9 +47,10 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user } = this.state;
+    const { movies, selectedMovie, registration, user } = this.state;
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user)
+      return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     //if (selectedMovie) return <MovieView movie={selectedMovie} />;
 
@@ -65,9 +66,17 @@ export class MainView extends React.Component {
           )
           : movies.map(movie => (
             <Col md={3}>
-              <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onMovieClick={newSelectedMovie => {
+                  this.setSelectedMovie(newSelectedMovie);
+                }}
+              />
             </Col>
           ))
         }
       </Row>
     );
+  }
+}

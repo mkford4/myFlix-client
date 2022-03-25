@@ -4,13 +4,15 @@ import ReactDOM from 'react-dom';
 import { MainView } from './components/main-view/main-view';
 
 //import to bundle scss file with jsx
-import 'index.scss';
+import './index.scss';
 
 //Main component
 class MyFlixApplication extends React.Component {
   render() {
     return (
-      <MainView />
+      <Container>
+        <MainView />
+      </Container>
     );
   }
 }

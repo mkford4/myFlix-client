@@ -1,6 +1,12 @@
+#login-button {
+  background-color: blue;
+  border: none;
+  color: white;
+  margin-top: 10px;
+}
 
 
 .my-flix {
-  color: steelblue;
+  color: #b5d696;
 }
 /*# sourceMappingURL=index.1d334ea1.css.map */

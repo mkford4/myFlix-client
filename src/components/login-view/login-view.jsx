@@ -19,9 +19,9 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://bechflix.herokuapp.com/users' {
-      Username: { Users.username },
-      Password: { Users.password },
+    axios.post('https://bechflix.herokuapp.com/users', {
+      Username: username,
+      Password: password,
     })
       .then(response => {
         const data = response.data;

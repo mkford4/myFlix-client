@@ -13,18 +13,22 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://bechflix.herokuapp.com/users', {
-      Username: username,
-      Password: password,
-    })
-      .then(response => {
-        const data = response.data;
-        props.onLoggedIn(data);
-      })
-      .catch(e => {
-        console.log('user doesn\'t exist');
-      });
+    console.log(username, password);
+    props.onLoggedIn(username);
   };
+
+  /*axios.post('https://bechflix.herokuapp.com/users', {
+    Username: username,
+    Password: password,
+  })
+    .then(response => {
+      const data = response.data;
+      props.onLoggedIn(data);
+    })
+    .catch(e => {
+      console.log('user doesn\'t exist');
+    });
+}; */
 
   return (
     <Container>
@@ -58,12 +62,13 @@ export function LoginView(props) {
 
   );
 
+  /*
   LoginView.propTypes = {
     user: PropTypes.shape({
       username: PropTypes.string.isRequired,
       password: PropTypes.string.isRequired
     }),
     onLoggedIn: PropTypes.func.isRequired
-  };
+  }; */
 
 }

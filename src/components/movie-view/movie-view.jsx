@@ -25,7 +25,7 @@ export class MovieView extends React.Component {
   render() {
     const { movie, onBackClick } = this.props;
 
-    if (!movies) return null;
+    //if (!movies) return null;
 
     return (
       <Container className="container movie-view">
@@ -50,9 +50,15 @@ export class MovieView extends React.Component {
                   </div>
                 </Card.Text>
                 <Card.Text>
+                  <div className="movie-director">
+                    <span className="label">Director: </span>
+                    <span className="value">[{movie.Director.Name}] {movie.Director.Bio}</span>
+                  </div>
+                </Card.Text>
+                <Card.Text>
                   <div className="movie-genre">
                     <span className="label">Genre: </span>
-                    <span className="value">{movie.Genre}</span>
+                    <span className="value">[{movie.Genre.Name}] {movie.Genre.Description}</span>
                   </div>
                 </Card.Text>
                 <Button onClick={() => { onBackClick(null); }}>Back</Button>

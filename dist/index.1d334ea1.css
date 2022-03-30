@@ -6,8 +6,11 @@
 }
 
 
-
-.my-flix {
-  color: #b5d696;
+.label {
+  font-weight: bold;
+}
+.app-container {
+  background-color: #b5d696;
+  font-family: "Poppins", sans-serif;
 }
 /*# sourceMappingURL=index.1d334ea1.css.map */

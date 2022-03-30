@@ -51,7 +51,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, registration, user } = this.state;
 
-    //if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     //if (selectedMovie) return <MovieView movie={selectedMovie} />;
 
@@ -65,8 +65,8 @@ export class MainView extends React.Component {
               <Col md={8}>
                 <MovieView
                   movie={selectedMovie}
-                  onBackClick={newSelectedMovie => {
-                    this.setSelectedMovie(newSelectedMovie);
+                  onBackClick={() => {
+                    this.setSelectedMovie(null);
                   }}
                 />
               </Col>

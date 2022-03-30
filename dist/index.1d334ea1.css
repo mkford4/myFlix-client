@@ -1,5 +1,8 @@
 
 
+.movie-card {
+  max-width: 200px;
+}
 .my-flix {
   color: steelblue;
 }

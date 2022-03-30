@@ -19,15 +19,13 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() { //connecting myFlix API with Axios
-    axios.get('https://bechflix.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       });
+      this.getMovies(accessToken);
+    }
   }
 
   setSelectedMovie(newSelectedMovie) {
@@ -68,6 +66,14 @@ export class MainView extends React.Component {
       });
   }
 
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
+
   render() {
     const { movies, selectedMovie, registration, user } = this.state;
 
@@ -103,6 +109,7 @@ export class MainView extends React.Component {
               </Col>
             ))
           }
+          <Button onClick={() => { this.onLoggedOut() }}>Logout</Button>
         </Row>
       </Container>
     );

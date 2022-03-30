@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Button, Card, Container, Row, Col, CardGroup } from 'react-bootstrap/';
 
 import './login-view.scss';
-import axios from 'axios'
+import axios from 'axios';
 
 import { RegistrationView } from '../registration-view/registration-view.jsx';
 
@@ -13,22 +13,18 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
-  };
-
-  /*axios.post('https://bechflix.herokuapp.com/users', {
-    Username: username,
-    Password: password,
-  })
-    .then(response => {
-      const data = response.data;
-      props.onLoggedIn(data);
+    axios.post('https://bechflix.herokuapp.com/login', {
+      Username: username,
+      Password: password,
     })
-    .catch(e => {
-      console.log('user doesn\'t exist');
-    });
-}; */
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('user doesn\'t exist');
+      });
+  };
 
   return (
     <Container>

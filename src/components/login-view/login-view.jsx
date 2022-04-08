@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, Container, Row, Col, CardGroup } from 'react-bootstrap/';
-
+import { Link } from "react-router-dom";
 import './login-view.scss';
 import axios from 'axios';
 
@@ -53,6 +53,7 @@ export function LoginView(props) {
     }
   };
 
+
   return (
     <Container>
       <Row>
@@ -89,7 +90,7 @@ export function LoginView(props) {
 
               <div><br></br>
                 <span>Or create an account here:</span><br></br>
-                <Button id="login-button" type="submit">Register</Button>
+                <Button href="/register">Register</Button>
               </div>
             </Card.Body>
           </Card>
@@ -99,13 +100,13 @@ export function LoginView(props) {
 
   );
 
-  /*
+
   LoginView.propTypes = {
     user: PropTypes.shape({
       username: PropTypes.string.isRequired,
       password: PropTypes.string.isRequired
     }),
     onLoggedIn: PropTypes.func.isRequired
-  }; */
+  };
 
 }

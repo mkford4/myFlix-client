@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap/';
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './registration-view.scss';
 
 export function RegistrationView(props) {
@@ -41,7 +41,7 @@ export function RegistrationView(props) {
     if (!email) {
       setEmailErr('Email Required');
       isReq = false;
-    } else if (indexOf('@' === -1)) {
+    } else if (email.indexOf('@' === -1)) {
       setEmailErr('Email must have @ symbol to be valid');
       isReq = false;
     }
@@ -141,7 +141,7 @@ export function RegistrationView(props) {
                     Submit
                   </Button>
                   <p></p>
-                  <p>Already registered? <Link to={'/'}>Sign In Here</Link></p>
+
                 </Form>
               </Card.Body>
             </Card>

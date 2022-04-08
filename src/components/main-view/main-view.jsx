@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
-import { Col, Row, Container } from "react-bootstrap/";
+import { Col, Row, Container, Button } from "react-bootstrap/";
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -85,7 +85,7 @@ export class MainView extends React.Component {
 
     if (!user) return <Row>
       <Col>
-        <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+        <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
       </Col>
     </Row>
 
@@ -110,10 +110,12 @@ export class MainView extends React.Component {
 
           //Register
             <Route path="/register" render={() => {
-              if (user) return <Redirect to="/" />
-              return <Col lg={8} md={8}>
-                <RegistrationView />
-              </Col>
+              //if (user) return <Redirect to="/" />
+              return (
+                <Col lg={8} md={8}>
+                  <RegistrationView />
+                </Col>
+              )
             }} />
 
           //Movie

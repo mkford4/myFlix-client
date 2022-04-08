@@ -1,77 +1,89 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap/';
-import { Link } from "react-router-dom";
-import './registration-view.scss';
+import React, { useState } from 'react'
+import axios from 'axios'
+import PropTypes from 'prop-types'
+import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap/'
+import { Link } from 'react-router-dom'
+import './registration-view.scss'
 
 export function RegistrationView(props) {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [birthday, setBirthday] = useState('');
+  const [values, setValues] = useState({
+    Username: '',
+    Password: '',
+    FirstName: '',
+    Email: '',
+    Birthday: ''
+  })
+  const [errors, setErrors] = useState({})
 
-  const [nameErr, setNameErr] = useState('');
-  const [usernameErr, setUsernameErr] = useState("");
-  const [passwordErr, setPasswordErr] = useState("");
-  const [emailErr, setEmailErr] = useState("");
-  const [birthdayErr, setBirthdayErr] = useState("");
+  const handleChange = (event) => {
+    event.persist()
+    setValues((values) => ({
+      ...values,
+      [event.target.name]: event.target.value
+    }))
+  }
 
-  const validate = () => {
-    let isReq = true;
-    if (name) {
-      setNameErr('Name is requried');
-      isReq = false;
-    }
-    if (!username) {
-      setUsernameErr('Username Required');
-      isReq = false;
-    } else if (username.length < 2) {
-      setUsernameErr('Username must be 2 characters long');
-      isReq = false;
-    }
-    if (!password) {
-      setPasswordErr('Password Required');
-      isReq = false;
-    } else if (password.length < 6) {
-      setPasswordErr('Password must be at least 6 characters long');
-      isReq = false;
-    }
-    if (!email) {
-      setEmailErr('Email Required');
-      isReq = false;
-    } else if (email.indexOf('@' === -1)) {
-      setEmailErr('Email must have @ symbol to be valid');
-      isReq = false;
+  const checkIfFormIsValid = () => {
+    let isValid = true
+    let newErrors = {}
+    if (!values.Username) {
+      isValid = false
+      newErrors.Username = 'Username is required'
+    } else if (values.Username.length < 6) {
+      isValid = false
+      newErrors.Username = 'Username must be at least 6 characters long'
     }
 
-    return isReq;
+    if (!values.Password) {
+      isValid = false
+      newErrors.Password = 'Password is required'
+    } else if (values.Password.length < 6) {
+      isValid = false
+      newErrors.Password = 'Password must be at least 6 characters long'
+    }
+
+    if (!values.Email) {
+      isValid = false
+      newErrors.Email = 'Email is required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.Email)) {
+      isValid = false
+      newErrors.Email = 'Invalid Email address'
+    }
+
+    if (!values.FirstName) {
+      isValid = false
+      newErrors.FirstName = 'First name is required'
+    }
+
+    if (!values.Birthday) {
+      isValid = false
+      newErrors.Birthday = 'Birthday is required'
+    }
+
+    setErrors(newErrors)
+    return isValid
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const isReq = validate();
+    e.preventDefault()
+    const isReq = checkIfFormIsValid()
+    console.log(isReq)
+    console.log(values)
     if (isReq) {
-      axios.post('https://bechflix.herokuapp.com/users', {
-        Name: name,
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthday: birthday
-      })
-        .then(response => {
-          const data = response.data;
-          console.log(data);
-          alert('Registration succesful, go ahead and log in!');
-          window.open('/', '_self'); //opens self aka in current tab
+      axios
+        .post('https://bechflix.herokuapp.com/users', values)
+        .then((response) => {
+          const data = response.data
+          console.log(data)
+          alert('Registration successful, go ahead and log in!')
+          window.open('/', '_self') //opens self aka in current tab
         })
-        .catch(e => {
-          console.error(response);
-          alert('Something wasn\'t entered right');
-        });
+        .catch((e) => {
+          console.error(response)
+          alert("Something wasn't entered right")
+        })
     }
-  };
+  }
 
   return (
     <Container>
@@ -82,66 +94,71 @@ export function RegistrationView(props) {
               <Card.Body>
                 <Card.Title>Please Register Here</Card.Title>
                 <Form>
-                  <Form.Group controlId="formUsername" className="reg-form-inputs">
+                  <Form.Group controlId='formUsername' className='reg-form-inputs'>
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
-                      type="text"
-                      value={username}
-                      onChange={e => setUsername(e.target.value)}
+                      type='text'
+                      value={values.Username}
+                      name='Username'
+                      onChange={handleChange}
                       required
-                      placeholder="Enter a username"
+                      placeholder='Enter a Username'
                     />
-                    {usernameErr && <p>{usernameErr}</p>}
+                    <p style={{ color: 'red' }}>{errors.Username}</p>
                   </Form.Group>
 
-                  <Form.Group controlId="formName" className="reg-form-inputs">
+                  <Form.Group controlId='formName' className='reg-form-inputs'>
                     <Form.Label>Name:</Form.Label>
-                    <Form.Control type="text"
-                      value={name}
-                      onChange={e => setName(e.target.value)}
+                    <Form.Control
+                      type='text'
+                      value={values.FirstName}
+                      name='FirstName'
+                      onChange={handleChange}
                     />
-                    {nameErr && <p>{nameErr}</p>}
+                    <p style={{ color: 'red' }}>{errors.FirstName}</p>
                   </Form.Group>
 
-                  <Form.Group controlId="formPassword" className="reg-form-inputs">
+                  <Form.Group controlId='formPassword' className='reg-form-inputs'>
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
-                      type="password"
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
+                      type='password'
+                      value={values.Password}
+                      name='Password'
+                      onChange={handleChange}
                       required
-                      minLength="8"
-                      placeholder="Your password must be 8 or more characters"
+                      minLength='6'
+                      placeholder='Your Password must be 6 or more characters'
                     />
-                    {passwordErr && <p>{passwordErr}</p>}
+                    <p style={{ color: 'red' }}>{errors.Password}</p>
                   </Form.Group>
 
-                  <Form.Group controlId="Email" className="reg-form-inputs">
+                  <Form.Group controlId='Email' className='reg-form-inputs'>
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
-                      type="email"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
+                      type='email'
+                      value={values.Email}
+                      name='Email'
+                      onChange={handleChange}
                       required
-                      placeholder="Enter your email address"
+                      placeholder='Enter your Email address'
                     />
-                    {emailErr && <p>{emailErr}</p>}
+                    <p style={{ color: 'red' }}>{errors.Email}</p>
                   </Form.Group>
-                  <Form.Group controlId="updateBirthday">
+                  <Form.Group controlId='updateBirthday'>
                     <Form.Label>Birthday</Form.Label>
-                    <Form.Control type="date"
-                      name="birthday"
-                      onChange={(e) => setBirthday(e.target.value)}></Form.Control>
+                    <Form.Control
+                      type='date'
+                      name='Birthday'
+                      value={values.Birthday}
+                      onChange={handleChange}
+                    ></Form.Control>
+                    <p style={{ color: 'red' }}>{errors.Birthday}</p>
                   </Form.Group>
 
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}>
+                  <Button variant='primary' type='submit' onClick={handleSubmit}>
                     Submit
                   </Button>
                   <p></p>
-
                 </Form>
               </Card.Body>
             </Card>
@@ -149,7 +166,7 @@ export function RegistrationView(props) {
         </Col>
       </Row>
     </Container>
-  );
+  )
 
   RegistrationView.propTypes = {
     regiser: PropTypes.shape({
@@ -157,7 +174,6 @@ export function RegistrationView(props) {
       Username: PropTypes.string.isRequired,
       Password: PropTypes.string.isRequired,
       Email: PropTypes.string.isRequired
-    }),
-  };
-
+    })
+  }
 }

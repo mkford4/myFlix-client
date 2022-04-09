@@ -10,47 +10,71 @@ import FavoriteMovies from "./favorite-movies";
 import UpdateUser from "./update-user";
 
 export function ProfileView({ movies, onUpdatedUserInfo }) {
-  /*
-const [user, setUser] = userState({
-  Username: '',
-  Email: '',
-  FavoriteMovies: []
-})
 
-const favoriteMovieList = movies.filter((movies) => {
-  return user.FavoriteMovies.includes(movies._id);
-});
+  const [user, setUser] = userState({
+    Username: '',
+    Email: '',
+    FavoriteMovies: []
+  })
 
-const getUser = () => {
+  const [updatedUser, setUpdatedUser] = setState({});
 
-}
+  const favoriteMovieList = movies.filter((movies) => {
+    return user.FavoriteMovies.includes(movies._id);
+  });
 
-useEffect(() => {
-  let isMounted = true;
-  isMounted && getUser();
-  return () => {
-    isMounted = false;
+  const getUser = () => {
+    axios.get('https://bechflix.herokuapp.com/users', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        this.setState({
+          users: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }
-}, [])
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.put('https://bechflix.herokuapp.com/users/${user.Username}',
+      updatedUser)
+      .then(response => {
+        setUserData(response.data);
+        alert('Profile successfully updated');
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
-}
+  const removeFav = (id) => {
+    axios.delete('https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}')
+      .then(() => {
+        setFavoriteMovieList(favoriteMovieList.filter(movie => movie._id != id));
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
-const removeFav = (id) => {
+  const handleUpdate = (e) => {
+    setUpdatedUser({
+      ...updatedUser,
+      [e.target.name]: e.target.value
+    });
+  }
 
-}
+  useEffect(() => {
+    let isMounted = true;
+    isMounted && getUser();
+    return () => {
+      isMounted = false;
+    }
+  }, [])
 
-const handleUpdate = (e) => {
-
-};
-
-useEffect{
-  () => {
-
-  }, []
-} 
-*/
 
   return (
     <Container>

@@ -152,9 +152,11 @@ export class MainView extends React.Component {
                         </Col>
                       )
                     return <Col md={8}>
-                      <GenreView genre={
-                        movies.find(m => m.Genre.Name === match.params.name).Genre
-                      }
+                      <GenreView
+                        movies={movies}
+                        genre={
+                          movies.find(m => m.Genre.Name === match.params.name).Genre
+                        }
                         onBackClick={() => history.goBack()}
                       />
                     </Col>
@@ -185,12 +187,12 @@ export class MainView extends React.Component {
                   path="/users/:Username"
                   render={({ history, match }) => {
                     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                    if (movies.length === 0) return <div className="main-view" />
-                    return
-                    <ProfileView
-                      history={history}
-                      movies={movies}
-                      user={user === match.params.username} />
+                    return <Col md={8}>
+                      <ProfileView
+                        history={history}
+                        movies={movies}
+                        user={user === match.params.username} />
+                    </Col>
                   }} />
               </Switch>
             </Router>

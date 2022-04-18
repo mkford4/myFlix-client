@@ -35,7 +35,7 @@ function FavoriteMovies({ favoriteMovieList }) {
                     </Figure.Caption>
                   </Link>
                 </Figure>
-                <button variant="seconday" onClick={() => removeFav(movies._id)}>
+                <button variant="danger" onClick={() => removeFav(movies._id)}>
                   Remove
                 </button>
               </Col>

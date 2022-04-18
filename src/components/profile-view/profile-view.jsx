@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Card, Container, Row, Col } from 'react-bootstrap/';
+import { Card, Container, Row, Col, Button } from 'react-bootstrap/';
 
 import "./profile-view.scss";
 import UserInfo from "./user-info";
@@ -41,8 +41,9 @@ export function ProfileView({ user: loggedUser, movies, onUpdatedUserInfo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`https://bechflix.herokuapp.com/users/${user.Username}`,
-      updatedUser)
+    axios.put(`https://bechflix.herokuapp.com/users/${user.Username}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }, updatedUser)
       .then(response => {
         setUserData(response.data);
         alert('Profile successfully updated');
@@ -53,7 +54,9 @@ export function ProfileView({ user: loggedUser, movies, onUpdatedUserInfo }) {
   }
 
   const removeFav = (id) => {
-    axios.delete(`https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}`)
+    axios.delete(`https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
       .then(() => {
         setFavoriteMovieList(favoriteMovieList.filter(movie => movie._id != id));
       })
@@ -62,11 +65,30 @@ export function ProfileView({ user: loggedUser, movies, onUpdatedUserInfo }) {
       });
   }
 
+  const deleteUser = (e) => {
+    const username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+
+    axios.delete('https://bechflix.herokuapp.com/users', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then((response) => {
+        console.log(response);
+        alert("Profile deleted");
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        window.open('/', '_self'); //returns to main-view
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+
   const handleUpdate = (e) => {
     setUpdatedUser({
       ...updatedUser,
       [e.target.name]: e.target.value
-    });
+    })
   }
 
   useEffect(() => {
@@ -88,6 +110,12 @@ export function ProfileView({ user: loggedUser, movies, onUpdatedUserInfo }) {
             <Card>
               <Card.Body>
                 <UserInfo name={user.Username} email={user.Email} />
+                <Button
+                  variant="danger"
+                  type="submit"
+                  onClick={deleteUser}>
+                  Delete Profile
+                </Button>
               </Card.Body>
             </Card>
           </Col>

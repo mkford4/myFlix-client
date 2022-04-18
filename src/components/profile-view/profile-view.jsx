@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap/';
@@ -9,15 +9,16 @@ import UserInfo from "./user-info";
 import FavoriteMovies from "./favorite-movies";
 import UpdateUser from "./update-user";
 
-export function ProfileView({ movies, onUpdatedUserInfo }) {
-
-  const [user, setUser] = userState({
+export function ProfileView({ user: loggedUser, movies, onUpdatedUserInfo }) {
+  const [user, setUser] = useState({
     Username: '',
     Email: '',
     FavoriteMovies: []
   })
+  const [updatedUser, setUpdatedUser] = useState({});
+  const [loading, setLoading] = useState(true)
 
-  const [updatedUser, setUpdatedUser] = setState({});
+  const token = localStorage.getItem('token')
 
   const favoriteMovieList = movies.filter((movies) => {
     return user.FavoriteMovies.includes(movies._id);
@@ -28,9 +29,11 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        this.setState({
-          users: response.data
-        });
+        const selectUser = response.data.find(u => u.Username === loggedUser)
+        setUser(selectUser)
+        setTimeout(() => {
+          setLoading(false)
+        }, 1000); //loading time set to 1 second
       })
       .catch(function (error) {
         console.log(error);
@@ -39,7 +42,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put('https://bechflix.herokuapp.com/users/${user.Username}',
+    axios.put(`https://bechflix.herokuapp.com/users/${user.Username}`,
       updatedUser)
       .then(response => {
         setUserData(response.data);
@@ -51,7 +54,7 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
   }
 
   const removeFav = (id) => {
-    axios.delete('https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}')
+    axios.delete(`https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}`)
       .then(() => {
         setFavoriteMovieList(favoriteMovieList.filter(movie => movie._id != id));
       })
@@ -78,24 +81,27 @@ export function ProfileView({ movies, onUpdatedUserInfo }) {
 
   return (
     <Container>
-      <Row>
-        <Col xs={12} sm={4}>
-          <Card>
-            <Card.Body>
-              <UserInfo name={user.Username} email={user.Email} />
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={8}>
-          <Card>
-            <Card.Body>
-              <UpdateUser handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <Row>
+          <Col xs={12} sm={4}>
+            <Card>
+              <Card.Body>
+                <UserInfo name={user.Username} email={user.Email} />
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs={12} sm={8}>
+            <Card>
+              <Card.Body>
+                <UpdateUser user={user} handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
 
-
+      )}
       <FavoriteMovies favoriteMovieList={favoriteMovieList} />
     </Container>
   )

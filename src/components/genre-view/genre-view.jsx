@@ -35,7 +35,7 @@ export class GenreView extends React.Component {
                 className=""
                 variant="top"
                 src={movie.ImagePath} />
-              <Card.Body style={{ backgroundColor: "black" }}>
+              <Card.Body>
                 <Card.Title className="">
                   {movie.Title}
                 </Card.Title>

@@ -7,7 +7,8 @@ import { Container, Card, Button, Row } from 'react-bootstrap/';
 export class DirectorView extends React.Component {
 
   render() {
-    const { director, onBackClick, movies } = this.props;
+    const { onBackClick, movies } = this.props;
+    const director = movies[0].Director;
 
     return (
       <Container fluid>
@@ -28,7 +29,7 @@ export class DirectorView extends React.Component {
             </Card.Text>
             <Card.Text>
               <span className="label">Death: </span>
-              <span className="value">{director.Death}</span>
+              <span className="value">{director.Death || '----'}</span>
             </Card.Text>
 
             <Button variant="seconday" onClick={() => { onBackClick(); }}>
@@ -43,7 +44,7 @@ export class DirectorView extends React.Component {
                 className=""
                 variant="top"
                 src={movie.ImagePath} />
-              <Card.Body style={{ backgroundColor: "black" }}>
+              <Card.Body>
                 <Card.Title className="">
                   {movie.Title}
                 </Card.Title>

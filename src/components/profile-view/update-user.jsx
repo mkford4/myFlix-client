@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-function UpdateUser({ handleSubmit, handleUpdate }) {
+function UpdateUser({ user, handleSubmit, handleUpdate }) {
   return (
 
     <Form>

@@ -21,7 +21,7 @@ function FavoriteMovies({ favoriteMovieList }) {
           </Col>
         </Row>
         <Row>
-          {favoriteMoviesList.map(({ ImagePath, Title, _id }) => {
+          {favoriteMovieList.map(({ ImagePath, Title, _id }) => {
             return (
               <Col xs={12} md={6} lg={3} key={_id}>
                 <Figure>

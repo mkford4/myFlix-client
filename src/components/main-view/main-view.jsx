@@ -112,6 +112,7 @@ export class MainView extends React.Component {
                 <Route
                   path="/register"
                   render={() => {
+                    // if (user) return <div className="main-view" />;
                     return (
                       <Col lg={8} md={8}>
                         <RegistrationView />
@@ -175,8 +176,9 @@ export class MainView extends React.Component {
                       )
                     return <Col md={8}>
                       <DirectorView
-                        director={
-                          movies.find(m => m.Director.Name === match.params.name).Director
+                        director={match.params.name}
+                        movies={
+                          movies.filter(m => m.Director.Name === match.params.name)
                         }
                         onBackClick={() => history.goBack()}
                       />
@@ -184,14 +186,14 @@ export class MainView extends React.Component {
                   }} />
 
                 <Route
-                  path="/users/:Username"
+                  path="/users/:username"
                   render={({ history, match }) => {
                     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
                     return <Col md={8}>
                       <ProfileView
                         history={history}
                         movies={movies}
-                        user={user === match.params.username} />
+                        user={match.params.username} />
                     </Col>
                   }} />
               </Switch>

@@ -35,7 +35,7 @@ export class MovieView extends React.Component {
             <Card>
               <Card.Body>
                 <div className="movie-poster">
-                  <img variant="top" src={movie.ImagePath} />
+                  <img variant="top" src={movie.ImagePath} style={{ width: '100%' }} />
                 </div>
                 <Card.Title>
                   <div className="movie-title">
@@ -44,27 +44,27 @@ export class MovieView extends React.Component {
                   </div>
                 </Card.Title>
 
-                <Card.Text>
-                  <div className="movie-description">
-                    <span className="label">Description: </span>
-                    <span className="value">{movie.Description}</span>
-                  </div>
-                </Card.Text>
-                <Card.Text>
-                  <div className="movie-director">
-                    <span className="label">Director: </span>
-                    <span className="value">[{movie.Director.Name}] {movie.Director.Bio}</span>
-                  </div>
-                </Card.Text>
+
+                <div className="movie-description">
+                  <span className="label">Description: </span>
+                  <span className="value">{movie.Description}</span>
+                </div>
+
+
+                <div className="movie-director">
+                  <span className="label">Director: </span>
+                  <span className="value">[{movie.Director.Name}] {movie.Director.Bio}</span>
+                </div>
+
                 <Link to={`/directors/${movie.Director.Name}`}>
                   <Button variant="link">Director</Button>
                 </Link>
-                <Card.Text>
-                  <div className="movie-genre">
-                    <span className="label">Genre: </span>
-                    <span className="value">[{movie.Genre.Name}] {movie.Genre.Description}</span>
-                  </div>
-                </Card.Text>
+
+                <div className="movie-genre">
+                  <span className="label">Genre: </span>
+                  <span className="value">[{movie.Genre.Name}] {movie.Genre.Description}</span>
+                </div>
+
                 <Link to={`/genres/${movie.Genre.Name}`}>
                   <Button variant="link">Genre</Button>
                 </Link>

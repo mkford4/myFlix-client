@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
@@ -24,8 +25,19 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, onBackClick, user } = this.props;
 
+    const addFav = (id) => {
+      axios.post(`https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(() => {
+          setFavoriteMovieList(favoriteMovieList.filter(movie => movie._id != id));
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
     //if (!movies) return null;
 
     return (
@@ -70,6 +82,7 @@ export class MovieView extends React.Component {
                 </Link>
                 <br />
                 <Button variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
+                <Button className="btn-main" onClick={addFav}>Favorite</Button>
               </Card.Body>
             </Card>
           </Col>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap/';
-import { Link } from "react-router-dom";
+import { Card, Container, Row, Col } from 'react-bootstrap/';
 
 import "./profile-view.scss";
 import UserInfo from "./user-info";

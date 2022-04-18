@@ -40558,13 +40558,21 @@ class MovieView extends _reactDefault.default.Component {
                                         children: "Genre"
                                     })
                                 }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                    __source: {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 71
+                                    },
+                                    __self: this
+                                }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_.Button, {
+                                    variant: "secondary",
                                     onClick: ()=>{
                                         onBackClick(null);
                                     },
                                     __source: {
                                         fileName: "src/components/movie-view/movie-view.jsx",
-                                        lineNumber: 71
+                                        lineNumber: 72
                                     },
                                     __self: this,
                                     children: "Back"
@@ -41151,7 +41159,6 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _ = require("react-bootstrap/");
-var _reactRouterDom = require("react-router-dom");
 var _profileViewScss = require("./profile-view.scss");
 var _userInfo = require("./user-info");
 var _userInfoDefault = parcelHelpers.interopDefault(_userInfo);
@@ -41223,21 +41230,21 @@ function ProfileView({ user: loggedUser , movies , onUpdatedUserInfo  }) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_.Container, {
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 83
+            lineNumber: 82
         },
         __self: this,
         children: [
             loading ? /*#__PURE__*/ _jsxRuntime.jsx("h1", {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 85
+                    lineNumber: 84
                 },
                 __self: this,
                 children: "Loading..."
             }) : /*#__PURE__*/ _jsxRuntime.jsxs(_.Row, {
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 87
+                    lineNumber: 86
                 },
                 __self: this,
                 children: [
@@ -41246,19 +41253,19 @@ function ProfileView({ user: loggedUser , movies , onUpdatedUserInfo  }) {
                         sm: 4,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 88
+                            lineNumber: 87
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_.Card, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 89
+                                lineNumber: 88
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_.Card.Body, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 90
+                                    lineNumber: 89
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_userInfoDefault.default, {
@@ -41266,7 +41273,7 @@ function ProfileView({ user: loggedUser , movies , onUpdatedUserInfo  }) {
                                     email: user.Email,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 91
+                                        lineNumber: 90
                                     },
                                     __self: this
                                 })
@@ -41278,19 +41285,19 @@ function ProfileView({ user: loggedUser , movies , onUpdatedUserInfo  }) {
                         sm: 8,
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 95
+                            lineNumber: 94
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_.Card, {
                             __source: {
                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                lineNumber: 96
+                                lineNumber: 95
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_.Card.Body, {
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 97
+                                    lineNumber: 96
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_updateUserDefault.default, {
@@ -41299,7 +41306,7 @@ function ProfileView({ user: loggedUser , movies , onUpdatedUserInfo  }) {
                                     handleUpdate: handleUpdate,
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 98
+                                        lineNumber: 97
                                     },
                                     __self: this
                                 })
@@ -41312,7 +41319,7 @@ function ProfileView({ user: loggedUser , movies , onUpdatedUserInfo  }) {
                 favoriteMovieList: favoriteMovieList,
                 __source: {
                     fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 105
+                    lineNumber: 104
                 },
                 __self: this
             })
@@ -41329,7 +41336,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-bootstrap/":"h2YVd","react-router-dom":"cpyQW","./profile-view.scss":"gb0ga","./user-info":"cK8m8","./favorite-movies":"gKhXS","./update-user":"hBcEf","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8"}],"gb0ga":[function() {},{}],"cK8m8":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","prop-types":"1tgq3","react-bootstrap/":"h2YVd","./profile-view.scss":"gb0ga","./user-info":"cK8m8","./favorite-movies":"gKhXS","./update-user":"hBcEf","@parcel/transformer-js/src/esmodule-helpers.js":"1Ulwy","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"gSAy8"}],"gb0ga":[function() {},{}],"cK8m8":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$94e5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

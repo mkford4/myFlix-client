@@ -8,7 +8,7 @@ import UserInfo from "./user-info";
 import FavoriteMovies from "./favorite-movies";
 import UpdateUser from "./update-user";
 
-export function ProfileView({ user: loggedUser, movies, onUpdatedUserInfo }) {
+export function ProfileView({ user: loggedUser, movies }) {
   const [user, setUser] = useState({
     Username: '',
     Email: '',
@@ -69,7 +69,7 @@ export function ProfileView({ user: loggedUser, movies, onUpdatedUserInfo }) {
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
 
-    axios.delete('https://bechflix.herokuapp.com/users', {
+    axios.delete(`https://bechflix.herokuapp.com/users/${user.Username}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => {

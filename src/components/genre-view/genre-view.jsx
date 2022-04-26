@@ -1,13 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Container, Card, Button, Row } from 'react-bootstrap/';
+import { Container, Card, Button, Row, Col } from 'react-bootstrap/';
 
 export class GenreView extends React.Component {
 
   render() {
-    const { genre, onBackClick, movies } = this.props;
+    const { onBackClick, movies } = this.props;
+    const genre = movies[0].Genre;
 
     return (
       <Container fluid>
@@ -23,27 +22,30 @@ export class GenreView extends React.Component {
               <span className="value">{genre.Description}</span>
             </Card.Text>
 
-            <Button variant="seconday" onClick={() => { onBackClick(); }}>
+            <Button variant="secondary" onClick={() => { onBackClick(); }}>
               Back
             </Button>
           </Card.Body>
         </Card>
         <Row>
           {movies.map(movie => (
-            <Card className="" key={movie._id} >
-              <Card.Img
-                className=""
-                variant="top"
-                src={movie.ImagePath} />
-              <Card.Body>
-                <Card.Title className="">
-                  {movie.Title}
-                </Card.Title>
-              </Card.Body>
-            </Card>
+            <Col md={6} sm={3}>
+              <Card className="" key={movie._id} >
+                <Card.Img
+                  crossOrigin="anonymous"
+                  className=""
+                  variant="top"
+                  src={movie.ImagePath} />
+                <Card.Body>
+                  <Card.Title className="">
+                    {movie.Title}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
         </Row>
-      </Container>
+      </Container >
     );
   }
 }

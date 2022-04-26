@@ -1,22 +1,32 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Figure } from 'react-bootstrap';
 import './profile-view.scss';
 
-function FavoriteMovies({ favoriteMovieList }) {
-  const removeFav = (id) => {
-    let token = localStorage.getItem('token');
-    let url = `https://bechflix.herokuapp.com/users/${localStorage.getItem('user')}/movies/${id}`;
-    axios.delete(url, {
-      headers: { Authorization: `Bearer ${token}` },
+function FavoriteMovies({ favoriteMovieList }, movies) {
+  const removeFav = (e, movie) => {
+    const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}` }
     })
+      .then(response => {
+        console.log(response);
+        alert('Movie has been removed');
+        this.componentDidMount();
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
+
 
   return (
     <Card>
       <Card.Body>
         <Row>
-          <Col xs={2}>
+          <Col>
             <h2>Favorite Movies</h2>
           </Col>
         </Row>
@@ -27,6 +37,7 @@ function FavoriteMovies({ favoriteMovieList }) {
                 <Figure>
                   <Link to={`/movies/${movies._id}`}>
                     <Figure.Image
+                      crossOrigin="anonymous"
                       src={ImagePath}
                       alt={Title}
                     />

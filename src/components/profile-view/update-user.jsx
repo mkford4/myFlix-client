@@ -12,25 +12,25 @@ function UpdateUser({ user, handleSubmit, handleUpdate }) {
           type='text'
           name='Username'
           defaultValue={user.Username}
-          onChange={e => handleUpdate(e)} />
+          onBlur={handleUpdate} />
       </Form.Group>
 
       <Form.Group>
         <Form.Label>Password:</Form.Label>
         <Form.Control
           type='password'
-          name='password'
+          name='Password'
           defaultValue={user.Password}
-          onChange={e => handleUpdate(e)} />
+          onBlur={handleUpdate} />
       </Form.Group>
 
       <Form.Group>
         <Form.Label>Email:</Form.Label>
         <Form.Control
           type='email'
-          name='email'
+          name='Email'
           defaultValue={user.Email}
-          onChange={e => handleUpdate(e.target.value)} />
+          onBlur={handleUpdate} />
       </Form.Group>
       <Button variant='primary' type='submit'
         onClick={handleSubmit}>

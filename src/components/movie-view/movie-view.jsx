@@ -3,11 +3,18 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
+import "../profile-view/favorite-movies"
 
 import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap/';
 
 export class MovieView extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFavorite: false,
+      FavoriteMovies: [],
+    };
+  }
   // add keyboard key press event listener
   keypressCallback(event) {
     console.log(event.key);
@@ -16,29 +23,32 @@ export class MovieView extends React.Component {
   componentDidMount() {
     document.addEventListener('keypress', this.keypressCallback);
   }
-
-  //componentDidUpdate() { goes here }
-
   //remove keypress
   componentWillUnmount() {
     document.removeEventListener('keypress', this.keypressCallback);
   }
 
-  render() {
-    const { movie, onBackClick, user } = this.props;
+  addFavorite(movie) {
+    let user = localStorage.getItem('user')
+    let token = localStorage.getItem('token');
+    let url = `https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`;
 
-    const addFav = (id) => {
-      axios.post(`https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+    axios.post(url, "", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        console.log(response);
+        //history.back();
+        alert('This movie has been added to your Favorites!');
       })
-        .then(() => {
-          setFavoriteMovieList(favoriteMovieList.filter(movie => movie._id != id));
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    }
-    //if (!movies) return null;
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  render() {
+    const { movie, onBackClick } = this.props;
+
 
     return (
       <Container className="container movie-view">
@@ -47,8 +57,9 @@ export class MovieView extends React.Component {
             <Card>
               <Card.Body>
                 <div className="movie-poster">
-                  <img variant="top" src={movie.ImagePath} style={{ width: '100%' }} />
+                  <img crossOrigin="anonymous" variant="top" src={movie.ImagePath} style={{ width: '75%' }} />
                 </div>
+                <br />
                 <Card.Title>
                   <div className="movie-title">
                     <span className="label">Title: </span>
@@ -81,8 +92,19 @@ export class MovieView extends React.Component {
                   <Button variant="link">Genre</Button>
                 </Link>
                 <br />
-                <Button variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
-                <Button className="btn-main" onClick={addFav}>Favorite</Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => { onBackClick(null); }}>
+                  Back
+                </Button>
+                <Button
+                  className="btn-main"
+                  label="+ Add"
+                  onClick={() => {
+                    this.addFavorite(movie);
+                  }}>
+                  Favorite
+                </Button>
               </Card.Body>
             </Card>
           </Col>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap/';
 
 import "./profile-view.scss";
@@ -41,11 +40,11 @@ export function ProfileView({ user: loggedUser, movies }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`https://bechflix.herokuapp.com/users/${user.Username}`, {
+    axios.put(`https://bechflix.herokuapp.com/users/${user.Username}`, updatedUser, {
       headers: { Authorization: `Bearer ${token}` }
-    }, updatedUser)
+    })
       .then(response => {
-        setUserData(response.data);
+        setUpdatedUser(response.data);
         alert('Profile successfully updated');
       })
       .catch(e => {
@@ -53,12 +52,15 @@ export function ProfileView({ user: loggedUser, movies }) {
       });
   }
 
-  const removeFav = (id) => {
-    axios.delete(`https://bechflix.herokuapp.com/users/${user.Username}/movies/${id}`, {
+  const removeFav = (e, movie) => {
+    const user = localStorage.getItem('user');
+    axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
-      .then(() => {
-        setFavoriteMovieList(favoriteMovieList.filter(movie => movie._id != id));
+      .then(response => {
+        console.log(response);
+        alert('Movie has been removed');
+        this.componentDidMount();
       })
       .catch(e => {
         console.log(e);

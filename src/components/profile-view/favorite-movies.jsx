@@ -5,20 +5,12 @@ import { Card, Row, Col, Figure } from 'react-bootstrap';
 import './profile-view.scss';
 
 function FavoriteMovies({ favoriteMovieList }, movies) {
-  const removeFav = (e, movie) => {
+  const removeFav = (id) => {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
       headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        console.log(response);
-        alert('Movie has been removed');
-        this.componentDidMount();
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    });
   }
 
 
@@ -31,18 +23,18 @@ function FavoriteMovies({ favoriteMovieList }, movies) {
           </Col>
         </Row>
         <Row>
-          {favoriteMovieList.map(({ ImagePath, Title, _id }) => {
+          {favoriteMovieList.map(({ movies }) => {
             return (
-              <Col xs={12} md={6} lg={3} key={_id}>
+              <Col xs={6} md={6} lg={3} key={movies._id}>
                 <Figure>
                   <Link to={`/movies/${movies._id}`}>
                     <Figure.Image
                       crossOrigin="anonymous"
-                      src={ImagePath}
-                      alt={Title}
+                      src={movies.ImagePath}
+                      alt={movies.Title}
                     />
                     <Figure.Caption>
-                      {Title}
+                      {movies.Title}
                     </Figure.Caption>
                   </Link>
                 </Figure>

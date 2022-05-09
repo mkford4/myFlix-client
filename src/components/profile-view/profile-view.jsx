@@ -52,7 +52,7 @@ export function ProfileView({ user: loggedUser, movies }) {
       });
   }
 
-  const removeFav = (e, movie) => {
+  const removeFav = (id) => {
     const user = localStorage.getItem('user');
     axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
       headers: { Authorization: `Bearer ${token}` }

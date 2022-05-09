@@ -40658,7 +40658,7 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactRouterDom = require("react-router-dom");
 var _reactBootstrap = require("react-bootstrap");
 var _profileViewScss = require("./profile-view.scss");
-function FavoriteMovies({ favoriteMovieList  }, movies) {
+function FavoriteMovies({ favoriteMovieList  }, movie) {
     const removeFav = (id)=>{
         const user = localStorage.getItem('user');
         const token = localStorage.getItem('token');
@@ -40666,37 +40666,43 @@ function FavoriteMovies({ favoriteMovieList  }, movies) {
             headers: {
                 Authorization: `Bearer ${token}`
             }
+        }).then((response)=>{
+            console.log(response);
+            alert('Movie has been removed');
+            this.componentDidMount();
+        }).catch((e)=>{
+            console.log(e);
         });
     };
     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
         __source: {
             fileName: "src/components/profile-view/favorite-movies.jsx",
-            lineNumber: 18
+            lineNumber: 26
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                lineNumber: 19
+                lineNumber: 27
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 20
+                        lineNumber: 28
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                         __source: {
                             fileName: "src/components/profile-view/favorite-movies.jsx",
-                            lineNumber: 21
+                            lineNumber: 29
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx("h2", {
                             __source: {
                                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                                lineNumber: 22
+                                lineNumber: 30
                             },
                             __self: this,
                             children: "Favorite Movies"
@@ -40706,68 +40712,68 @@ function FavoriteMovies({ favoriteMovieList  }, movies) {
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                        lineNumber: 25
+                        lineNumber: 33
                     },
                     __self: this,
-                    children: favoriteMovieList.map(({ movies: movies1  })=>{
+                    children: favoriteMovieList.map(({ ImagePath , Title , _id  })=>{
                         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Col, {
                             xs: 6,
                             md: 6,
                             lg: 3,
                             __source: {
                                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                                lineNumber: 28
+                                lineNumber: 36
                             },
                             __self: this,
                             children: [
                                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure, {
                                     __source: {
                                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                                        lineNumber: 29
+                                        lineNumber: 37
                                     },
                                     __self: this,
                                     children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
-                                        to: `/movies/${movies1._id}`,
+                                        to: `/movies/${_id}`,
                                         __source: {
                                             fileName: "src/components/profile-view/favorite-movies.jsx",
-                                            lineNumber: 30
+                                            lineNumber: 38
                                         },
                                         __self: this,
                                         children: [
                                             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure.Image, {
                                                 crossOrigin: "anonymous",
-                                                src: movies1.ImagePath,
-                                                alt: movies1.Title,
+                                                src: ImagePath,
+                                                alt: Title,
                                                 __source: {
                                                     fileName: "src/components/profile-view/favorite-movies.jsx",
-                                                    lineNumber: 31
+                                                    lineNumber: 39
                                                 },
                                                 __self: this
                                             }),
                                             /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Figure.Caption, {
                                                 __source: {
                                                     fileName: "src/components/profile-view/favorite-movies.jsx",
-                                                    lineNumber: 36
+                                                    lineNumber: 44
                                                 },
                                                 __self: this,
-                                                children: movies1.Title
+                                                children: Title
                                             })
                                         ]
                                     })
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx("button", {
                                     variant: "danger",
-                                    onClick: ()=>removeFav(movies1._id)
+                                    onClick: ()=>removeFav(_id)
                                     ,
                                     __source: {
                                         fileName: "src/components/profile-view/favorite-movies.jsx",
-                                        lineNumber: 41
+                                        lineNumber: 49
                                     },
                                     __self: this,
                                     children: "Remove"
                                 })
                             ]
-                        }, movies1._id));
+                        }, _id));
                     })
                 })
             ]
@@ -41416,7 +41422,7 @@ function ProfileView({ user: loggedUser , movies  }) {
             console.log(e1);
         });
     };
-    const removeFav = (e, movie)=>{
+    const removeFav = (id)=>{
         const user1 = localStorage.getItem('user');
         _axiosDefault.default.delete(`https://bechflix.herokuapp.com/users/${user1}/movies/${movie._id}`, {
             headers: {
@@ -41426,8 +41432,8 @@ function ProfileView({ user: loggedUser , movies  }) {
             console.log(response);
             alert('Movie has been removed');
             this.componentDidMount();
-        }).catch((e1)=>{
-            console.log(e1);
+        }).catch((e)=>{
+            console.log(e);
         });
     };
     const deleteUser = (e)=>{

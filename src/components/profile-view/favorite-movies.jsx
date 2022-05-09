@@ -4,13 +4,21 @@ import { Link } from "react-router-dom";
 import { Card, Row, Col, Figure } from 'react-bootstrap';
 import './profile-view.scss';
 
-function FavoriteMovies({ favoriteMovieList }, movies) {
+function FavoriteMovies({ favoriteMovieList }, movie) {
   const removeFav = (id) => {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
       headers: { Authorization: `Bearer ${token}` }
-    });
+    })
+      .then(response => {
+        console.log(response);
+        alert('Movie has been removed');
+        this.componentDidMount();
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
 
@@ -23,22 +31,22 @@ function FavoriteMovies({ favoriteMovieList }, movies) {
           </Col>
         </Row>
         <Row>
-          {favoriteMovieList.map(({ movies }) => {
+          {favoriteMovieList.map(({ ImagePath, Title, _id }) => {
             return (
-              <Col xs={6} md={6} lg={3} key={movies._id}>
+              <Col xs={6} md={6} lg={3} key={_id}>
                 <Figure>
-                  <Link to={`/movies/${movies._id}`}>
+                  <Link to={`/movies/${_id}`}>
                     <Figure.Image
                       crossOrigin="anonymous"
-                      src={movies.ImagePath}
-                      alt={movies.Title}
+                      src={ImagePath}
+                      alt={Title}
                     />
                     <Figure.Caption>
-                      {movies.Title}
+                      {Title}
                     </Figure.Caption>
                   </Link>
                 </Figure>
-                <button variant="danger" onClick={() => removeFav(movies._id)}>
+                <button variant="danger" onClick={() => removeFav(_id)}>
                   Remove
                 </button>
               </Col>

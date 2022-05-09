@@ -5,6 +5,7 @@ import { Container, Card, Button, Row, Col } from 'react-bootstrap/';
 export class GenreView extends React.Component {
 
   render() {
+
     const { onBackClick, movies } = this.props;
     const genre = movies[0].Genre;
 

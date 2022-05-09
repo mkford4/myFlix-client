@@ -102,7 +102,7 @@ export class MainView extends React.Component {
                       )
                     if (movies.length === 0) return <div className="main-view" />;
                     return movies.map(m => (
-                      <Col md={3} key={m._id}>
+                      <Col md={3} sm={6} key={m._id}>
                         <MovieCard movie={m} />
                       </Col>
                     ))
@@ -112,7 +112,7 @@ export class MainView extends React.Component {
                 <Route
                   path="/register"
                   render={() => {
-                    // if (user) return <div className="main-view" />;
+                    if (user) return <Redirect to='/' />
                     return (
                       <Col lg={8} md={8}>
                         <RegistrationView />
@@ -154,9 +154,9 @@ export class MainView extends React.Component {
                       )
                     return <Col md={8}>
                       <GenreView
-                        movies={movies}
-                        genre={
-                          movies.find(m => m.Genre.Name === match.params.name).Genre
+                        genre={match.params.name}
+                        movies={
+                          movies.filter(m => m.Genre.Name === match.params.name)
                         }
                         onBackClick={() => history.goBack()}
                       />

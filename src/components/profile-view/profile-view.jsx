@@ -8,18 +8,14 @@ import FavoriteMovies from "./favorite-movies";
 import UpdateUser from "./update-user";
 
 export function ProfileView({ user: loggedUser, movies }) {
-  const [user, setUser] = useState({
-    Username: '',
-    Email: '',
-    FavoriteMovies: []
-  })
+  const [user, setUser] = useState(null)
   const [updatedUser, setUpdatedUser] = useState({});
   const [loading, setLoading] = useState(true)
 
   const token = localStorage.getItem('token')
 
   const favoriteMovieList = movies.filter((movies) => {
-    return user.FavoriteMovies.includes(movies._id);
+    return user?.FavoriteMovies.includes(movies._id);
   });
 
   const getUser = () => {
@@ -46,21 +42,6 @@ export function ProfileView({ user: loggedUser, movies }) {
       .then(response => {
         setUpdatedUser(response.data);
         alert('Profile successfully updated');
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-
-  const removeFav = (id) => {
-    const user = localStorage.getItem('user');
-    axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        console.log(response);
-        alert('Movie has been removed');
-        this.componentDidMount();
       })
       .catch(e => {
         console.log(e);
@@ -101,36 +82,32 @@ export function ProfileView({ user: loggedUser, movies }) {
     }
   }, [])
 
+  if (loading) return <h1>Loading...</h1>
 
   return (
     <Container>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <Row>
-          <Col xs={12} sm={4}>
-            <Card>
-              <Card.Body>
-                <UserInfo name={user.Username} email={user.Email} />
-                <Button
-                  variant="danger"
-                  type="submit"
-                  onClick={deleteUser}>
-                  Delete Profile
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} sm={8}>
-            <Card>
-              <Card.Body>
-                <UpdateUser user={user} handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-      )}
+      <Row>
+        <Col xs={12} sm={4}>
+          <Card>
+            <Card.Body>
+              <UserInfo name={user.Username} email={user.Email} />
+              <Button
+                variant="danger"
+                type="submit"
+                onClick={deleteUser}>
+                Delete Profile
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={12} sm={8}>
+          <Card>
+            <Card.Body>
+              <UpdateUser user={user} handleSubmit={handleSubmit} handleUpdate={handleUpdate} />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
       <FavoriteMovies favoriteMovieList={favoriteMovieList} />
     </Container>
   )

@@ -4,17 +4,19 @@ import { Link } from "react-router-dom";
 import { Card, Row, Col, Figure } from 'react-bootstrap';
 import './profile-view.scss';
 
-function FavoriteMovies({ favoriteMovieList }, movie) {
+function FavoriteMovies({ favoriteMovieList }) {
+  const [movieList, setMovieList] = React.useState(favoriteMovieList)
+
   const removeFav = (id) => {
     const user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
-    axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${movie._id}`, {
+    axios.delete(`https://bechflix.herokuapp.com/users/${user}/movies/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         console.log(response);
         alert('Movie has been removed');
-        this.componentDidMount();
+        setMovieList(movieList.filter(movie => movie._id != id))
       })
       .catch(e => {
         console.log(e);
@@ -31,7 +33,7 @@ function FavoriteMovies({ favoriteMovieList }, movie) {
           </Col>
         </Row>
         <Row>
-          {favoriteMovieList.map(({ ImagePath, Title, _id }) => {
+          {movieList.map(({ ImagePath, Title, _id }) => {
             return (
               <Col xs={6} md={6} lg={3} key={_id}>
                 <Figure>

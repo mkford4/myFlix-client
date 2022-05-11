@@ -9,6 +9,10 @@
 .label {
   font-weight: bold;
 }
+
+.btn-primary.btn-main {
+  background-color: #79568f;
+}
 .fav-movie {
   margin-bottom: 15px;
 }

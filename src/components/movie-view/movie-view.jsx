@@ -57,54 +57,52 @@ export class MovieView extends React.Component {
             <Card>
               <Card.Body>
                 <div className="movie-poster">
-                  <img crossOrigin="anonymous" variant="top" src={movie.ImagePath} style={{ width: '75%' }} />
+                  <img crossOrigin="anonymous" variant="top" src={movie.ImagePath} style={{ width: '100%' }} />
                 </div>
                 <br />
                 <Card.Title>
                   <div className="movie-title">
                     <span className="label">Title: </span>
                     <span className="value">{movie.Title}</span>
+                    <Button
+                      className="btn-main"
+                      label="+ Add"
+                      onClick={() => {
+                        this.addFavorite(movie);
+                      }}>
+                      ★
+                    </Button>
                   </div>
                 </Card.Title>
-
+                <br></br>
 
                 <div className="movie-description">
                   <span className="label">Description: </span>
                   <span className="value">{movie.Description}</span>
                 </div>
 
+                <br></br>
 
                 <div className="movie-director">
-                  <span className="label">Director: </span>
+                  <Link to={`/directors/${movie.Director.Name}`}>Director: </Link>
                   <span className="value">[{movie.Director.Name}] {movie.Director.Bio}</span>
                 </div>
 
-                <Link to={`/directors/${movie.Director.Name}`}>
-                  <Button variant="link">Director</Button>
-                </Link>
+                <br />
 
                 <div className="movie-genre">
-                  <span className="label">Genre: </span>
+                  <Link to={`/genres/${movie.Genre.Name}`}>Genre: </Link>
                   <span className="value">[{movie.Genre.Name}] {movie.Genre.Description}</span>
                 </div>
 
-                <Link to={`/genres/${movie.Genre.Name}`}>
-                  <Button variant="link">Genre</Button>
-                </Link>
+
                 <br />
                 <Button
                   variant="secondary"
                   onClick={() => { onBackClick(null); }}>
                   Back
                 </Button>
-                <Button
-                  className="btn-main"
-                  label="+ Add"
-                  onClick={() => {
-                    this.addFavorite(movie);
-                  }}>
-                  Favorite
-                </Button>
+
               </Card.Body>
             </Card>
           </Col>

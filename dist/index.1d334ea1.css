@@ -11,7 +11,20 @@
 }
 
 .btn-primary.btn-main {
-  background-color: #79568f;
+  background-color: #FFD700;
+  border: none;
+  float: right;
+}
+
+.btn-primary.btn-main:hover {
+  background-color: #d7be32;
+}
+
+.movie-poster {
+  text-align: center;
+  max-width: 200px;
+  float: left;
+  margin-right: 30px;
 }
 .fav-movie {
   margin-bottom: 15px;

@@ -2,7 +2,26 @@ $main-font: "Poppins",
 sans-serif;
 $color: #b5d696;
 $color2: #79568f;
+$gold: #FFD700;
+$gold-shade: #d7be32;
 
 .label {
   font-weight: bold;
+}
+
+.btn-primary.btn-main {
+  background-color: $gold;
+  border: none;
+  float: right;
+}
+
+.btn-primary.btn-main:hover {
+  background-color: $gold-shade;
+}
+
+.movie-poster {
+  text-align: center;
+  max-width: 200px;
+  float: left;
+  margin-right: 30px;
 }

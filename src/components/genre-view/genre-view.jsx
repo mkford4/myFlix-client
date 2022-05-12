@@ -30,8 +30,8 @@ export class GenreView extends React.Component {
         </Card>
         <Row>
           {movies.map(movie => (
-            <Col md={6} sm={3}>
-              <Card className="" key={movie._id} >
+            <Col md={6} sm={3} key={movie._id}>
+              <Card className="">
                 <Card.Img
                   crossOrigin="anonymous"
                   className=""

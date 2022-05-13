@@ -19,3 +19,10 @@ Built using:
 - Javascript
 - Axios
 - Parcel
+
+
+Continued development:
+- Add a feature that shows which movies are in a user's Favorites list in Main View
+- Include further movie information, such as year, actor info, etc
+- Allow users to make multiple lists, such as a "To Watch" list in their Profile
+- Toggle the Log Out and Register buttons based on when user is logged in or not

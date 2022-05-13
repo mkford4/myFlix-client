@@ -7,6 +7,8 @@ for users to find movie information including genre and director details. Also
 includes a feature for users to update profile information and add/remove favorite
 movies to a list.
 
+![Bechflix-screenshot](https://user-images.githubusercontent.com/91907563/168342873-77f50d54-9395-4f88-8afa-bff7f17c279b.png)
+
 Overview:
 A single-page application featuring a main view, single movie view, login/registration view,
 genre view and director view, along with a filtering option for users to search movies.
@@ -26,3 +28,4 @@ Continued development:
 - Include further movie information, such as year, actor info, etc
 - Allow users to make multiple lists, such as a "To Watch" list in their Profile
 - Toggle the Log Out and Register buttons based on when user is logged in or not
+

@@ -41760,7 +41760,8 @@ function MoviesList(props) {
                 })
             }),
             filteredMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                    md: 3,
+                    lg: 3,
+                    md: 4,
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
                         lineNumber: 29

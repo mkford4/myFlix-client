@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap/';
+import { connect } from 'react-redux';
 
 export class DirectorView extends React.Component {
 
@@ -68,3 +69,10 @@ DirectorView.proptypes = {
     Death: PropTypes.string
   })
 };
+
+const mapStateToProps = (state) => {
+  const { directors } = state;
+  return { directors };
+};
+
+export default connect(mapStateToProps)(DirectorView);

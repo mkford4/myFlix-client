@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap/';
+import { connect } from 'react-redux';
 
 export class GenreView extends React.Component {
 
@@ -57,3 +58,10 @@ GenreView.proptypes = {
     Description: PropTypes.string.isRequired
   }).isRequired,
 };
+
+const mapStateToProps = (state) => {
+  const { genres } = state;
+  return { genres };
+};
+
+export default connect(mapStateToProps)(GenreView);

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom";
 import { Col, Row, Container, Button } from "react-bootstrap/";
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser, setGenres, setDirectors } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 
 import { LoginView } from '../login-view/login-view';
@@ -66,6 +66,8 @@ class MainView extends React.Component {
     })
       .then(response => {
         this.props.setMovies(response.data);
+        this.props.setGenres(response.data);
+        this.props.setDirectors(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -204,8 +206,18 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return {
+    movies: state.movies,
+    user: state.user,
+    directors: state.directors,
+    genres: state.genres
+  }
 }
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, {
+  setMovies,
+  setUser,
+  setGenres,
+  setDirectors
+})(MainView);
 

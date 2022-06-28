@@ -111,7 +111,6 @@ class MainView extends React.Component {
                 <Route
                   path="/register"
                   render={() => {
-                    if (user) return <Redirect to='/' />
                     return (
                       <Col lg={8} md={8}>
                         <RegistrationView />

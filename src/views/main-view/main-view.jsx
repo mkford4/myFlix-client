@@ -6,16 +6,16 @@ import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-ro
 import { Col, Row, Container, Button } from "react-bootstrap/";
 
 import { setMovies, setUser, setGenres, setDirectors } from '../../actions/actions';
-import MoviesList from '../movies-list/movies-list';
+import MoviesList from '../../components/movies-list/movies-list';
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 //import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
+import { MovieView } from '../../components/movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
-import { NavBar } from '../navbar/navbar';
-import { ProfileView } from '../profile-view/profile-view';
+import { NavBar } from '../../components/navbar/navbar';
+import { ProfileView } from '../../components/profile-view/profile-view';
 
 class MainView extends React.Component {
 
